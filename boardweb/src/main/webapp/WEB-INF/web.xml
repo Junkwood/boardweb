@@ -3,23 +3,25 @@
   <display-name>boardweb</display-name>
   
   <!-- welcom.do 요청 -> co.yedam.WelcomServlet실행. -->
+  
   <servlet>
-  <servlet-name>welcome</servlet-name>
-  <servlet-class>co.yedam.WelcomeServlet</servlet-class>
+  	<servlet-name>welcome</servlet-name>
+  	<servlet-class>co.yedam.WelcomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>welcome</servlet-name>
-  <url-pattern>/welcome.do</url-pattern>
+  	<servlet-name>welcome</servlet-name>
+  	<url-pattern>/welcome.do</url-pattern>
   </servlet-mapping>
+  
   <servlet>
-  <servlet-name>front</servlet-name>
-  <servlet-class>
-	co.yedam.common.FrontController</servlet-class>
+  	<servlet-name>front</servlet-name>
+  	<servlet-class>co.yedam.common.FrontController</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>front</servlet-name>
-  <url-pattern>*.do</url-pattern> 
+  	<servlet-name>front</servlet-name>
+  	<url-pattern>*.do</url-pattern> 
   </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

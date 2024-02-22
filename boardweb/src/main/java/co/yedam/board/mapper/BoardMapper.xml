@@ -4,7 +4,64 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="co.yedam.board.mapper.BoardMapper">
-  <select id="boardList" resultType="co.yedam.board.Board">
-    select * from tbl_board order by 1
+
+  <select id="boardList" resultType="board" parameterType="search">
+        select rn,
+            board_no,
+            title,
+            content,
+            writer,
+            view_cnt,
+            create_date
+        FROM(select /*+INDEX_desc(b board_pk)*/ rownum rn, b.*
+            FROM tbl_board b 
+            <where>
+              <choose>
+                <when test="searchCondition == 'T'.toString() ">
+                title like '%'||#{keyword}||'%'
+                </when>
+                <when test="searchCondition == 'W'.toString() ">
+                writer like '%'||#{keyword}||'%'
+                </when>
+                <when test="searchCondition == 'TW'.toString() ">
+                (title like '%'||#{keyword}||'%' 
+                OR writer like '%'||#{keyword}||'%')
+                </when>
+              </choose>
+              <![CDATA[
+              and rownum<=(#{page}*5)
+              ]]>
+            </where>
+            ) a
+            WHERE a.rn>(#{page}-1)*5
+  </select>
+  <select id="getTotalCnt" resultType="int">
+	select count(*)
+	FROM tbl_board
+	<where>
+         <choose>
+           <when test="searchCondition == 'T'.toString() ">
+            title like '%'||#{keyword}||'%'
+           </when>
+           <when test="searchCondition == 'W'.toString() ">
+            writer like '%'||#{keyword}||'%'
+           </when>
+           <when test="searchCondition == 'TW'.toString() ">
+            (title like '%'||#{keyword}||'%' 
+           OR writer like '%'||#{keyword}||'%')
+           </when>
+         </choose>
+	</where>
+  </select>
+  
+  <select id="selectBoard" parameterType="int" resultType="board">
+   select board_no
+          ,title
+          ,content
+          ,writer
+          ,view_cnt
+          ,create_date
+   FROM tbl_board
+   WHERE board_no=#{bno}
   </select>
 </mapper>

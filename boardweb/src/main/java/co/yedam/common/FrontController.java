@@ -10,8 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.yedam.board.control.AddBoard;
+import co.yedam.board.control.AddForm;
 import co.yedam.board.control.BoardControl;
 import co.yedam.board.control.BoardListControl;
+import co.yedam.board.control.ModifyBoard;
+import co.yedam.board.control.RemoveBoard;
+import co.yedam.board.control.RemoveForm;
+import co.yedam.board.control.UpdateForm;
+import co.yedam.member.control.LoginControl;
+import co.yedam.member.control.LoginForm;
 
 //init -> service -> destroy.
 public class FrontController extends HttpServlet {
@@ -31,6 +39,18 @@ public class FrontController extends HttpServlet {
 		controls.put("/boardList.do", new BoardListControl());
 		//단건조회
 		controls.put("/board.do", new BoardControl());
+		//수정
+		controls.put("/updateForm.do", new UpdateForm());
+		
+		controls.put("/modifyBoard.do", new ModifyBoard());//수정처리후목록
+		controls.put("/removeForm.do", new RemoveForm());//삭제화면으로 이동.
+		controls.put("/removeBoard.do", new RemoveBoard());//삭제화면으로 이동.
+		controls.put("/addForm.do", new AddForm());
+		controls.put("/addBoard.do", new AddBoard());
+		//회원관련
+		controls.put("/loginForm.do", new LoginForm());
+		controls.put("/login.do", new LoginControl());
+		
 	}
 	
 	//service.
@@ -44,6 +64,7 @@ public class FrontController extends HttpServlet {
 		System.out.println("path : "+path);
 		
 		Control control = controls.get(path);
+		System.out.println(control);
 		control.exec(req, resp);//요청url과 따른 실행컨트롤을 호출.
 		
 	}

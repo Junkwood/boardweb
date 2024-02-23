@@ -13,7 +13,7 @@ import co.yedam.common.SearchVO;
 //데이터 처리는 mapper기능.
 public class BoardServiceImpl implements BoardService{
 	
-	SqlSession session = DataSource.getInstance().openSession();
+	SqlSession session = DataSource.getInstance().openSession(true);//openSession() 에 true 값넣으면 자동커밋됨.기본값은 false로 DML문 커밋되지 않음. 
 	BoardMapper mapper = session.getMapper(BoardMapper.class);
 	
 	@Override
@@ -27,7 +27,24 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public Board getBoard(int bno) {
+		mapper.updateCount(bno);
 		return mapper.selectBoard(bno);
 	}
+
+	@Override
+	public boolean modifyBoard(Board board) {
+		return mapper.updateBoard(board)==1;
+	}
+
+	@Override
+	public boolean removeBoard(int bno) {
+		return mapper.deleteBoard(bno)==1;
+	}
+
+	@Override
+	public boolean addBoard(Board board) {
+		return mapper.insertBoard(board)==1;
+	}
+	
 
 }

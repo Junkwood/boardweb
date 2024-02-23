@@ -16,6 +16,7 @@ public class BoardControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//board.do->WEB-INF/view/board.jsp
 		String bno = req.getParameter("bno");
 		BoardService svc = new BoardServiceImpl();
 		Board board = svc.getBoard(Integer.parseInt(bno));
@@ -24,7 +25,8 @@ public class BoardControl implements Control {
 		
 		String path = "WEB-INF/view/board.jsp";
 		RequestDispatcher dispatch = req.getRequestDispatcher(path);
-				dispatch.forward(req, resp);
+				dispatch.forward(req, resp);//요청정보,응답정보를 담음.
+				
 		
 	}
 

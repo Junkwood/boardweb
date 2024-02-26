@@ -41,7 +41,7 @@ public class BoardListControl implements Control {
 		req.setAttribute("searchCondition", searchCond);
 		req.setAttribute("keyword", keyword);
 		
-		String path = "WEB-INF/view/boardList.jsp";
+		String path = "board/boardList.tiles";
 		RequestDispatcher dispatch = req.getRequestDispatcher(path);//getRequestDispatcher는 페이지를 재지정하는 객체.
 				dispatch.forward(req, resp); //페이지 재지정
 	}

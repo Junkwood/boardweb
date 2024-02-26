@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
-<jsp:include page="../includes/header.jsp"></jsp:include>
   <h3>상세조회</h3>
   <form action = "updateForm.do">
   <input type="hidden" value="${board.boardNo }" name ="bno">
@@ -26,15 +25,22 @@
       </tr>
       <tr>
         <td colspan="4" align="center">
+        <c:choose>
+          <c:when test="${board.writer eq logid}">
           <button type="submit" class="btn btn-primary">수정</button>
           <button type="button" class="btn btn-danger" onclick="removeFunc()">삭제</button>
+          </c:when>
+          <c:otherwise>
+          <button type="submit" class="btn btn-primary" disabled>수정</button>
+          <button type="button" class="btn btn-danger" disabled onclick="removeFunc()">삭제</button>
+          </c:otherwise>
+        </c:choose>
         </td>
       </tr>
     </table>
   </form>
 
 
-<jsp:include page="../includes/footer.jsp"></jsp:include>
 <script>
   function removeFunc(){
 	let form = document.querySelector('form');
@@ -42,6 +48,5 @@
 	form.submit();
 	form.action = 'updateForm.do';
   }
-
   
 </script>

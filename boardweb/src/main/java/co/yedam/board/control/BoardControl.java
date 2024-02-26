@@ -23,7 +23,7 @@ public class BoardControl implements Control {
 		
 		req.setAttribute("board", board);
 		
-		String path = "WEB-INF/view/board.jsp";
+		String path = "board/board.tiles";
 		RequestDispatcher dispatch = req.getRequestDispatcher(path);
 				dispatch.forward(req, resp);//요청정보,응답정보를 담음.
 				

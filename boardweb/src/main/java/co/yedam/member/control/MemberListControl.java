@@ -41,9 +41,8 @@ public class MemberListControl implements Control {
 		req.setAttribute("searchCondition", searchCond);
 		req.setAttribute("keyword", keyword);
 		
-		String path = "member/memberList.jsp";
-		RequestDispatcher dispatch = req.getRequestDispatcher(path);//getRequestDispatcher는 페이지를 재지정하는 객체.
-				dispatch.forward(req, resp); //페이지 재지정
+		String path = "member/memberList.tiles";
+		req.getRequestDispatcher(path).forward(req, resp); //페이지 재지정
 	}
 
 }

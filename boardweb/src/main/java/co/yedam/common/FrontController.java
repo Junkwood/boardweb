@@ -14,7 +14,9 @@ import co.yedam.board.control.AddBoard;
 import co.yedam.board.control.AddForm;
 import co.yedam.board.control.BoardControl;
 import co.yedam.board.control.BoardListControl;
+import co.yedam.board.control.CartListContol;
 import co.yedam.board.control.ModifyBoard;
+import co.yedam.board.control.ProductListContol;
 import co.yedam.board.control.RemoveBoard;
 import co.yedam.board.control.RemoveForm;
 import co.yedam.board.control.UpdateForm;
@@ -59,6 +61,10 @@ public class FrontController extends HttpServlet {
 		controls.put("/addMember.do", new AddMemberControl());
 		controls.put("/addMemberForm.do", new AddMemberForm());
 		controls.put("/memberList.do", new MemberListControl());
+		//기타
+		controls.put("/productList.do",new ProductListContol());
+		
+		controls.put("/cartList.do",new CartListContol());
 		
 	}
 	

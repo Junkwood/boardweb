@@ -5,7 +5,7 @@
 <script src="static/js/userList.js"></script>
 <input type="text" id="name" >
 <select id = "genderList" class="form-control">
-	<option value="male">남성</option>
+	<option value="Male">남성</option>
 	<option value="Female">여성</option>
 	
 </select>

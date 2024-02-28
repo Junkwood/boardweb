@@ -65,6 +65,8 @@ public class FrontController extends HttpServlet {
 		controls.put("/productList.do",new ProductListContol());
 		
 		controls.put("/cartList.do",new CartListContol());
+		//자바스크립트 연습
+		controls.put("/userList.do",new UserListContol());
 		
 	}
 	

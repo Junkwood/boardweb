@@ -3,6 +3,7 @@ package co.yedam.board.mapper;
 import java.util.List;
 
 import co.yedam.board.Board;
+import co.yedam.board.Book;
 import co.yedam.common.SearchVO;
 
 public interface BoardMapper {
@@ -21,4 +22,8 @@ public interface BoardMapper {
 	int deleteBoard(int bno);
 	//글등록
 	int insertBoard(Board board);
+	//도서목록.
+	List<Book> bookList();
+	int insertBook(Book book);
+	int deleteBook(String bcode);
 }

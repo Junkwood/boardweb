@@ -21,7 +21,7 @@ let str = `[{"id":1,"first_name":"Berri","last_name":"Trotton","email":"btrotton
 let json = JSON.parse(str);//문자열을 object타입으로 변환.
 
 document.addEventListener('DOMContentLoaded', function(e) {
-	document.querySelector('#name').value = '홍길동';
+	//document.querySelector('#name').value = '홍길동';
 	//thead생성
 	let title = json[0];
 	let tr = document.createElement('tr');
@@ -33,30 +33,28 @@ document.addEventListener('DOMContentLoaded', function(e) {
 	document.querySelector('#tableList thead').appendChild(tr);
 	//tbody영역
 	json.forEach(function(item, idx) {
-		//console.log(item, idx);//item=>{}
-		let tr = document.createElement('tr');
-		for (let prop in item) {
-			let td = document.createElement('td');
-			td.innerText = item[prop];
-			tr.appendChild(td);
-		};
-		document.querySelector('#tableList tbody').appendChild(tr);
-		document.querySelector('#genderList').addEventListener('change', gender)
+		document.querySelector('#tableList tbody').appendChild(makeRow(item));
+		document.querySelector('#genderList').addEventListener('change', reduceList)
+
+
 		function gender(e) {
 			let selected = this.value;
 			document.querySelector('#tableList tbody').innerHTML = '';//tbody 비우기.
 			json.forEach(function(item, idx) {
-				if (item.gender == selected) {
-					let tr = document.createElement('tr');
-					for (let prop in item) {
-						let td = document.createElement('td');
-						td.innerText = item[prop];
-						tr.appendChild(td);
-					};
-					document.querySelector('#tableList tbody').appendChild(tr);
+				if (selected == item.gender || selected == 'All') {
+					document.querySelector('#tableList tbody').appendChild(makeRow(item));
 				}
 			});
 		}
 	});//end  of foreach
 
 });//DOMContentLoaded : 페이지가 모두 로딩이 되었을때 이벤트 발생.
+function makeRow(item) {
+	let tr = document.createElement('tr');
+	for (let prop in item) {
+		let td = document.createElement('td');
+		td.innerText = item[prop];
+		tr.appendChild(td);
+	};
+	return tr;
+}

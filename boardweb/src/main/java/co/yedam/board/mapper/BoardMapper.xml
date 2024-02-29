@@ -83,4 +83,22 @@
   insert into tbl_board (board_no, title, content, writer)
   values (board_seq.nextval, #{title},#{content},#{writer})
   </insert>
+  <!-- 도서관련 -->
+  <select id="bookList" resultType="co.yedam.board.Book">
+  	select book_code,
+  	       book_name,
+  	       author,
+  	       press,
+  	       price
+  	 From tbl_book
+  	 order by book_code
+  </select>
+  <insert id="insertBook" parameterType="co.yedam.board.Book">
+  insert into tbl_book
+  values (#{bookCode},#{bookName},#{author},#{press},#{price})
+  </insert>
+  <delete id="deleteBook" parameterType="co.yedam.board.Book">
+  delete tbl_book
+  where book_code like #{bookCode}
+  </delete>
 </mapper>

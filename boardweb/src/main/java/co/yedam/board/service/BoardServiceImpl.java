@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import co.yedam.board.Board;
+import co.yedam.board.Book;
 import co.yedam.board.mapper.BoardMapper;
 import co.yedam.common.DataSource;
 import co.yedam.common.SearchVO;
@@ -44,6 +45,21 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public boolean addBoard(Board board) {
 		return mapper.insertBoard(board)==1;
+	}
+
+	@Override
+	public List<Book> bookList() {
+		return mapper.bookList();
+	}
+
+	@Override
+	public boolean addBook(Book book) {
+		return mapper.insertBook(book)==1;
+	}
+
+	@Override
+	public boolean removeBook(String bcode) {
+		return mapper.deleteBook(bcode)==1;
 	}
 	
 

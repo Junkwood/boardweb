@@ -31,26 +31,30 @@ fetch(url)
 document.querySelector('#searchBtn').addEventListener('click', searchFnc);
 function searchFnc(e) {
 	tbody.remove();
-	
-	let search=document.querySelector('#searchBtn').value;
+	tbody = document.createElement('tbody');
+	tbody.setAttribute('id','list'); 
+	document.querySelector('table').append(tbody)
+	let search=document.querySelector('#keyword').value;
 	fetch(url)
 		.then(resolve => resolve.json())
 		.then(result => {
 			//console.log(result.data[0]);
 			result.data.forEach(center => {
+				if(center['sido']==search){
 				let tr = document.createElement('tr');
 				showFields.forEach(field => {
-					let td = document.createElement('td');
-					if(field=='sido'&&center[field]==search){
+						let td = document.createElement('td');
 					if (field == 'centerName') {
 						td.innerText = center[field].substring('코로나19 '.length);
 					} else {
 						td.innerText = center[field]
 					}
-					}
 					tr.append(td);
 				})
 				tbody.append(tr);
+				}
+				
+				
 			})
 		})
 		.catch(err => console.log(err));

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id='show'></div>
+	<script>
+		console.log('javascript/ajax.html');
+		
+		var listFunc = function(result){
+			console.log(result);
+			result.forEach(reply => {
+				let li = document.createElement('li');
+				li.innerText = reply.reply;
+				document.querySelector('#show').append(li);
+			})
+		}
+		async function list(){
+		let resolve = await fetch('../replyList.do?bno='+89+'&page='+1);
+		let result = await resolve.json();
+		result.forEach(reply => {
+			let li = document.createElement('li');
+			li.innerText = reply.reply;
+			document.querySelector('#show').append(li);
+		})
+		}
+		//등록
+		try{
+		asyncFunc();
+		async function asyncFunc(){
+		let prom1 = await fetch('../addReply.do',{
+			method : 'post',
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded'
+			},
+			body: 'bno='+89+'&reply='+'fetch test'+'&replyer='+'newbie'
+		})
+		let json1=await prom1.json();
+		if(json.retCode=='OK'){
+			alert('성공')
+			let prom2 = await fetch('../replyList.do?bno='+86+'&page='+1)
+			let json2= await prom2.json()
+			json2.forEach((reply)=>{
+				let li = document.createElement('li');
+				li.innerText = reply.replyer;
+				document.querySelector('#show').append(li);
+				})
+		}else{
+			alert('실패')
+		}
+		}
+		}catch(err){console.log(err)
+		}
+		//삭제
+		fetch('../removeReply.do',{
+			method : 'post',
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded'
+			},
+			body : 'rno='+179
+		})
+		.then(resolve=>resolve.json())
+		.then(result=>{
+			if(result.retCode=='OK'){
+				alert(result.retMsg)
+			}else{
+				alert(result.retMsg)
+			}
+		})
+		.catch(err=>console.log(err));
+
+	</script>
+</body>
+</html>

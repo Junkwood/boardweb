@@ -36,4 +36,25 @@ from dual
  from tbl_reply
  where board_no=#{bno}
 </select>
+<insert id="insertCenter">
+ insert into tbl_center(id, center_name, sido, phone_number,address)
+ <foreach collection="array" item="center"
+  open="select " separator=" from dual union all select " close=" from dual">
+  #{center.id},#{center.centerName},#{center.sido},#{center.phoneNumber},#{center.address}
+ </foreach>
+</insert>
+<delete id="deleteCenter">
+ delete from tbl_center
+ where id in
+ <foreach collection="array" item="center" open=" ( " separator= " , " close=" ) ">
+ #{center.id}
+ </foreach>
+</delete>
+<select id = "countPerSido" resultType="map">
+select sido "sido",
+       count(*) "cnt"
+from tbl_center
+group by sido
+
+</select>
 </mapper>

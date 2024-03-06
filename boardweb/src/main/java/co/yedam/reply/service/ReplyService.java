@@ -1,7 +1,9 @@
 package co.yedam.reply.service;
 
 import java.util.List;
+import java.util.Map;
 
+import co.yedam.common.Center;
 import co.yedam.common.SearchVO;
 import co.yedam.reply.Reply;
 
@@ -12,4 +14,9 @@ public interface ReplyService {
 	
 	//댓글전체건수
 	int totalCount(int bno);
+	//센터등록.
+	int addCenter(Center[] array);
+	int removeCenter(Center[] array);
+	//시도정보
+	List<Map<String,Object>> getCntSido();
 }

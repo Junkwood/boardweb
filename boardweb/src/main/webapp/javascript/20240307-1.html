@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #show {
+      background: yellow;
+      width: 400px;
+      height: 205px;
+    }
+
+    #show span {
+      display: inline-block;
+      width: 90px;
+      border: 1px solid green;
+      background: pink;
+      margin: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="keyword">
+  <br>
+  <div id="show">
+    <span>Lorem</span>
+    <span>ipsum</span>
+    <span>dolor</span>
+    <span>sit,</span>
+    <span>amet</span>
+    <span>consectetur</span>
+    <span>adipisicing</span>
+    <span>elit.</span>
+    <span>Maxime,</span>
+    <span>dicta</span>
+    <span>officia</span>
+    <span>similique</span>
+    <span>ratione</span>
+    <span>id</span>
+    <span>labore</span>
+    <span>tempora</span>
+    <span>iure</span>
+    <span>harum</span>
+    <span>provident,</span>
+    <span>deleniti</span>
+    <span>odio</span>
+    <span>esse</span>
+    <span>officiis</span>
+    <span>illo</span>
+    <span>eos</span>
+    <span>illum</span>
+    <span>quae</span>
+    <span>veritatis</span>
+    <span>vero</span>
+    <span>doloribus.</span>
+  </div>
+  <div>
+    <span id = "timer"></span>
+    <span id =""></span>
+  </div>
+
+  <script>
+  let show = document.querySelectorAll('#show span')
+  document.querySelector('#keyword').addEventListener('change',function(e){
+  show.forEach(prop=>{
+    if(prop.innerText==this.value){
+      prop.remove();
+    }
+  });
+  this.value='';
+
+  const obj = {
+    name : "hong",
+    age:20,
+    showInfo:function(){
+      return `${this.name}, ${this.age}`;
+    },
+  	showAge(){
+    	reuturn `${this.age}`;
+    }
+  }
+  obj.bloodType='O';
+  Number.prototype.format=function(){
+	  
+  }//=>해당방식으로 내장객체의 내용을 수정할 수 있음.
+  Date.prototype.format=function(){
+    let yyyy=this.getFullYear();
+    let MM = this.getMonth()+1;
+    let dd = this.getDate();
+    let HH = this.getHours();
+    let mm = this.getMinutes();
+    let ss = this.getSeconds();
+
+    MM=('0'+ MM).slice(-2);
+    dd=('0'+ dd).slice(-2);
+    HH=('0'+ HH).slice(-2);
+    mm=('0'+ mm).slice(-2);
+    ss=('0'+ ss).slice(-2);
+	
+    return `${yyyy}.${MM}.${dd} ${HH}:${mm}:${ss}`;
+  }
+  let timing = 100;
+  let job= setInterval(function(){
+    let now = new Date();
+    document.querySelector('#timer').value=now;
+    let clearCnt = document.querySelectorAll('#show span').length;//span갯수.
+    timing--;
+    if(clearCnt ==0&&timing>=0){
+      alert('성공');
+      document.querySelector('#keyword').setAttribute('disabled',true);
+      clearInterval(job);
+    }
+    if(timing<0){
+      alert('실패');
+      document.querySelector('#keyword').setAttribute('disabled',true);
+      clearInterval(job);
+    }
+  },1000)
+  })
+  </script>
+</body>
+
+</html>

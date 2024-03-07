@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #show {
+      background: yellow;
+      width: 400px;
+      height: 205px;
+    }
+
+    #show span {
+      display: inline-block;
+      width: 90px;
+      border: 1px solid green;
+      background: pink;
+      margin: 1px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <select class="left" multiple style="height:150px">
+    <option value="">hello1</option>
+    <option value="">hello2</option>
+    <option value="">hello3</option>
+    <option value="">hello4</option>
+    <option value="">hello5</option>
+  </select>
+
+  <button>+</button>
+  <button>-</button>
+
+  <select class="right" multiple style="height:150px">
+    <option value="">world1</option>
+    <option value="">world2</option>
+    <option value="">world3</option>
+    <option value="">world4</option>
+    <option value="">world5</option>
+  </select>
+
+</body>
+<script>
+$('button:eq(0)').on('click',function(e){
+  let sel = $('select.left>option:selected');
+	$('.right').append(sel)
+  // let selectOpt = $('select.left>option:parent');
+  // console.log(selectOpt)
+})
+$('button:eq(1)').on('click',function(e){
+	$('.left').append($('select.right>option:selected'))
+})
+</script>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery2.html</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	Todo:
+	<input id="userVal">
+	<button id=addBtn>추가</button>
+	<br />
+	<ul id="list">
+	</ul>
+	<hr />
+	학번:
+	<input id="sno"> 이름:
+	<input id="sname"> 점수:
+	<input id="score">
+	<button class="addBtn" id="submit">등록</button>
+	<table border="1">
+		<thead>
+			<tr>
+				<th><input type="checkbox"></th>
+				<th>학번</th>
+				<th>이름</th>
+				<th>점수</th>
+			</tr>
+		</thead>
+		<tbody id="list">
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>101</td>
+				<td>홍길동</td>
+				<td>90</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>102</td>
+				<td>김영수</td>
+				<td>88</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>103</td>
+				<td>박형석</td>
+				<td>85</td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+		//체크박스 change이벤트
+		$('thead input[type="checkbox"]').on('change',function(e){
+			console.log($(this).prop('checked'))
+			let tof= $(this).prop('checked')
+			$('tbody input[type="checkbox"]').prop('checked',tof)
+		})
+		//addeventlistener=>on
+		$('#addBtn').on('click', function(e) {
+			let val = $('#userVal').val();//.val()=.value
+			let delBtn = $('<button>삭제</button>')
+			delBtn.on('click', function(e) {
+				delBtn.parent().remove();//부모요소 호출도 함수로 처리필요. .parentElement => .parent()
+			})
+			$('#list').append($('<li/>').text(val).append(delBtn));
+			$('#userVal').val('');//.val('')=(value='')
+		})
+		$('#submit').on(
+				'click',
+				function(e) {
+					let tr = $('<tr/>').append(
+							$('<td>').append(
+									$('<input/>').attr('type', 'checkbox')),
+									$('<td>').text($('#sno').val()),
+									$('<td>').text($('#sname').val()),
+									$('<td>').text($('#score').val()))
+
+					$('tbody#list').append(tr)
+					$('#sno').val('')
+					$('#sname').val('')
+					$('#score').val('')
+				})
+	</script>
+</body>
+</html>

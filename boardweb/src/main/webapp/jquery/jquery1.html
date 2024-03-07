@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery1.html</title>
+<script src="jquery-3.7.1.min.js"></script>
+</head>
+<body>
+	<div id = "show">
+	<!-- 
+		<ul>
+		<li>홍길동</li>
+		<li>김민식</li>
+		</ul>
+	-->
+	</div>
+	<script>
+	let  ulTag=$('<ul />').append($('<li />').text('홍길동'), 
+			                      $('<li />').text('김민석'));//jquery객체. document.createElement('ul');
+	$('#show').append(ulTag)//document.querySelector('#show').append(ulTag);
+	</script>
+</body>
+</html>

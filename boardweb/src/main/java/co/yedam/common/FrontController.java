@@ -86,6 +86,8 @@ public class FrontController extends HttpServlet {
 		//
 		controls.put("/registerCenter.do", new RegisterCenter());
 		controls.put("/getSidoInfo.do", new SidoInfoControl());
+		//
+		controls.put("/dataTable.do", new DataTableControl());
 	}
 	
 	//service.

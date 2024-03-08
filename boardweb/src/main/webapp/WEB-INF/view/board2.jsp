@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link href="//cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
-
 <style>
-
 div.reply div{
 	margin:auto;
 }
@@ -110,26 +105,11 @@ div.reply li{
 		</ul>
 	</div>
 	<div class="footer">
-		<!-- datable start. -->
-		<table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>댓글번호</th>
-                <th>댓글내용</th>
-                <th>작성자</th>
-                <th>작성일시</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>댓글번호</th>
-                <th>댓글내용</th>
-                <th>작성자</th>
-                <th>작성일시</th>
-            </tr>
-        </tfoot>
-    </table>
-    <!-- datable end. -->
+		<div class="center">
+			<div class="pagination">
+				<a href="/replyList.do?bno=${board.boardNo}&page=1">1</a> <a href="/replyList.do?bno=${board.boardNo}&page=2">2</a> <a href="/replyList.do?bno=${board.boardNo}&page=3" class=active>3</a>
+			</div>
+		</div>
 	</div>
 </div>
 <script>
@@ -141,33 +121,7 @@ div.reply li{
 		form.submit();
 		form.action = 'updateForm.do';
 	}
-	
-	var table = $('#example').DataTable({
-	    ajax: 'dataTable.do?bno='+bno,
-	    columns: [
-	        { data: 'replyNo' },
-	        { data: 'reply' },
-	        { data: 'replyer' },
-	        { data: 'replyDate' },
-	    ],
-	    lengthMenu:[
-	    	[5,10,15,20,-1],
-	    	[5,10,15,20,'All']
-	    ]
-	    
-	});
-	
-	$('.addReply').on('click', function () {
-		
-	    table.row
-	        .add(
-	        	{'replyNo':'1',
-	        	'reply':'reply',
-	        	'replyer':'replyer',
-	        	'replyDate':'2024-03-08'}
-	        	
-	        ).draw(false);
-	});
-	//숙제 : 댓글등록 누르면 addreply.do DB등록도 되고 반환되는 값으로 화면상 표에 추가되는 작업해보기.
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src = "static/js/boardAjax.js"></script>
+<script type="module" src = "static/js/boardService4.js"></script>

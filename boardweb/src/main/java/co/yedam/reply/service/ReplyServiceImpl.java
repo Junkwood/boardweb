@@ -21,6 +21,11 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
+	public List<Reply> replyList2(int bno) {
+		return mapper.selectList2(bno);
+	}
+
+	@Override
 	public boolean addReply(Reply reply) {
 		return mapper.insertReply(reply)==1;
 	}
@@ -51,5 +56,6 @@ public class ReplyServiceImpl implements ReplyService {
 		System.out.println(mapper.countPerSido());
 		return mapper.countPerSido();
 	}
+
 
 }

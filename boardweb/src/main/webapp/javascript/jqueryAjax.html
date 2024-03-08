@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQueryAjax.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        $.get('../bookList.do', function (result) {
+            result.forEach((item, idx, ary) => {
+                console.log(item, idx, ary);
+            });
+            $(result).each((idx, item, ary) => {//순서가 idx>item>ary순이라 item쓰려면 idx,item으로 입력필요
+                console.log(item);
+                $('<tr/>').append($('<td/>').text(item.bookCode),
+                    $('<td/>').text(item.bookName),
+                    $('<td/>').text(item.author)
+                ).appendTo($('table:eq(1) tbody'))
+            });
+        });
+        $(document).ready(function (e) {
+
+            $('#addBtn').on('click', function (e) {
+                let bcode = $('#bcode').val();
+                let bname = $('#bname').val();
+                let bauth = $('#bauth').val();
+                let bpress = $('#bpress').val();
+                let bprice = $('#bprice').val();
+                $.ajax({
+                    url: '../addBook.do',
+                    method: 'post',
+                    data: {
+                        bcode, bname, bauth, bpress, bprice
+                        //bcode:$('#bcode').val(), bname:$('#bname').val() 형식으로 작성가능.
+                    },
+                    dataType: 'json'
+                })
+                    .done(function (result) {
+                        console.log(result);
+                        if (result.retCode == 'OK') {
+                            alert('정상등록 완료');
+                            $('<tr/>').append($('<td/>').text(bcode),
+                                $('<td/>').text(bname),
+                                $('<td/>').text(bauth)
+                            ).appendTo($('table:eq(1) tbody'))
+                        } else {
+                            alert('등록 실패');
+                        }
+                    })
+                    .fail(function (err) {
+                        console.log(err);
+                    })
+                    .always(function (result) {
+                        console.log('처리완료.');
+                    });
+                // $.post('../addBook.do',
+                //     { bcode, bname, bauth, bpress, bprice },
+                //     function (result) {
+                //         if (result.retCode == 'OK') {
+                //             alert('정상등록 완료');
+                //             $('<tr/>').append($('<td/>').text(bcode),
+                //                 $('<td/>').text(bname),
+                //                 $('<td/>').text(bauth)
+                //             ).appendTo($('table:eq(1) tbody'))
+                //         } else {
+                //             alert('등록 실패');
+                //         }
+                //     });
+            });
+        });
+    </script>
+    <table class="table">
+        <tr>
+            <th>도서코드</th>
+            <td><input type="text" id="bcode"></td>
+        </tr>
+        <tr>
+            <th>도서명</th>
+            <td><input type="text" id="bname"></td>
+        </tr>
+        <tr>
+            <th>저자</th>
+            <td><input type="text" id="bauth"></td>
+        </tr>
+        <tr>
+            <th>출판사</th>
+            <td><input type="text" id="bpress"></td>
+        </tr>
+        <tr>
+            <th>가격</th>
+            <td><input type="number" id="bprice"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button id="addBtn" class="btn btn-primary">등록</button>
+            </td>
+        </tr>
+    </table>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>도서코드</th>
+                <th>도서명</th>
+                <th>저자</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+
+</html>

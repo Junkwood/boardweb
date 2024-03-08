@@ -38,6 +38,7 @@ public class AddBookControl implements Control {
 			}
 		} catch (Exception e) {
 			// {"retCod":"NG"}
+			e.printStackTrace();
 			resp.getWriter().print("{\"retCode\":\"NG\"}");
 
 		}

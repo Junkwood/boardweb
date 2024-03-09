@@ -141,7 +141,6 @@ div.reply li{
 		form.submit();
 		form.action = 'updateForm.do';
 	}
-	
 	var table = $('#example').DataTable({
 	    ajax: 'dataTable.do?bno='+bno,
 	    columns: [
@@ -158,16 +157,49 @@ div.reply li{
 	});
 	
 	$('.addReply').on('click', function () {
-		
-	    table.row
-	        .add(
-	        	{'replyNo':'1',
-	        	'reply':'reply',
-	        	'replyer':'replyer',
-	        	'replyDate':'2024-03-08'}
-	        	
-	        ).draw(false);
+		let reply = $('#reply').val();
+		if (!reply) {
+			alert('댓글입력하세요.')
+			return;
+		}
+		if (!replyer) {
+			alert('로그인이 필요합니다.')
+			return;
+		}
+		let param = { bno: bno, reply: reply, replyer: replyer };
+		function addReply(param={bno:1,reply:'reply',replyer:'replyer'},successCall,errorCall){
+			$.ajax({
+				url:'addReply.do',
+				method:'post',
+				data:param,
+				dataType:'json'
+			})
+			.done(successCall)
+			.fail(errorCall)
+		}
+		addReply(param, function(result) {
+		if (result.retCode == 'OK') {
+			alert('댓글등록 완료')
+			$('#reply').val('')
+			table.ajax.reload();
+		} else {
+			alert('댓글등록 실패')
+		}
+	}, function(err) {
+		console.log('err=>', err)
+	})
+
 	});
+	
 	//숙제 : 댓글등록 누르면 addreply.do DB등록도 되고 반환되는 값으로 화면상 표에 추가되는 작업해보기.
 </script>
+
+<!-- table.row
+.add(
+	{'replyNo':'1',
+	'reply':'reply',
+	'replyer':'replyer',
+	'replyDate':'2024-03-08'}
+	
+).draw(false); -->
 

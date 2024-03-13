@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		fetch('url')
+		.then(function(result) {
+			return result.json();//json=>object
+		})
+		.then(function(result) {
+			//화면상의 요소생성
+		})
+		.catch(function(err){
+			
+		})
+		
+		//Promise 객체
+		const p1=new Promise(function(resolve,reject){
+			setTimeout(function(){
+				resolve('OK')
+				//reject('NG')
+			},1000)//;
+		});
+		const p2 = p1.then(function(result){
+			console.log('then:',result);
+			return 'hello';
+		})
+		const p3 = p2.then(function(result){
+			console.log('then2:',result)
+			//return 'world';
+			return new Promise(function(resolve, reject){
+				//resolve('world')
+				let message="Message";
+				reject(message);
+			})
+		})
+		p3.then(function(result){
+			console.log('then3:',result)
+		})
+		.catch(function(err){
+			console.log('catch3:',err);
+		})
+	</script>
+</body>
+</html>

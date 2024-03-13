@@ -12,6 +12,7 @@ public class Acontrol implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("A컨트롤이 실행되었습니다.");
+		System.out.println("dklj;falk;djfpoqjeroij");
 	}
 
 }
